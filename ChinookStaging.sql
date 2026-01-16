@@ -61,5 +61,7 @@ LEFT JOIN Customer c
 	ON i.CustomerId = c.CustomerId
 LEFT JOIN Employee e
 	ON e.EmployeeId = c.SupportRepId
-
+WHERE il.InvoiceId IS NOT NULL
 ORDER BY TrackId
+
+SELECT * FROM ChinookStaging.dbo.Sales
