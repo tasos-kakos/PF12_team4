@@ -17,7 +17,7 @@ CREATE DATABASE ChinookStaging;
 
 -- Employees
 
-SELECT EmployeeId, LastName, FirstName, Title
+SELECT EmployeeId, LastName, FirstName, Title, ReportsTo, HireDate
 INTO ChinookStaging.dbo.Employees
 FROM Employee;
 
@@ -50,7 +50,7 @@ ORDER BY TrackId;
 
 -- Sales
 
-SELECT t.TrackId, i.InvoiceId, e.EmployeeId, i.CustomerId, i.InvoiceDate, t.UnitPrice, il.Quantity
+SELECT t.TrackId, i.InvoiceId, e.EmployeeId, i.CustomerId, i.InvoiceDate, t.UnitPrice, il.Quantity , il.UnitPrice * il.Quantity as LineTotal
 INTO ChinookStaging.dbo.Sales
 FROM Track t
 LEFT JOIN InvoiceLine il
@@ -61,4 +61,5 @@ LEFT JOIN Customer c
 	ON i.CustomerId = c.CustomerId
 LEFT JOIN Employee e
 	ON e.EmployeeId = c.SupportRepId
-ORDER BY TrackId;
+
+ORDER BY TrackId
